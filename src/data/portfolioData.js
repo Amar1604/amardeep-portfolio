@@ -7,7 +7,7 @@ export const personalInfo = {
   phone: "+91 8630655865",
   github: "https://github.com/Amar1604",
   linkedin: "https://linkedin.com/in/amar-deep1604",
-  resumePath: "assets/documents/Amardeep_Resume.pdf",
+  resumePath: "assets/documents/Amardeep.pdf",
   bio: [
     "I am a Computer Science and Engineering student at ABES Institute of Technology with a strong foundation in full-stack web architecture, cross-platform mobile application development (Flutter & Dart), modern frontend frameworks (React 19, Next.js), backend systems (Django REST, FastAPI, Node.js), and AI/LLM integrations.",
     "During my Virtual Internship at Infosys Springboard, I engineered BudgetBuddy, a decoupled personal finance platform with 70% query optimization and complete unit/E2E test suites. I also build fluid, responsive cross-platform mobile apps using Flutter & Dart and love participating in national hackathons—having won 1st Place at Hacknovate 7.0 and reached the Grand Finals of HACK IITK 2026."
