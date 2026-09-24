@@ -23,15 +23,15 @@ export const CanvasBackground = ({ theme }) => {
     const getColors = () => {
       if (theme === 'light') {
         return {
-          particle: 'rgba(124, 58, 237, 0.22)',
-          line: 'rgba(124, 58, 237, 0.1)',
-          hoverParticle: 'rgba(14, 165, 233, 0.5)'
+          particle: 'rgba(59, 130, 246, 0.25)',
+          line: 'rgba(38, 52, 73, 0.15)',
+          hoverParticle: 'rgba(96, 165, 250, 0.6)'
         };
       } else {
         return {
-          particle: 'rgba(0, 242, 254, 0.25)',
-          line: 'rgba(157, 78, 221, 0.12)',
-          hoverParticle: 'rgba(255, 0, 127, 0.5)'
+          particle: 'rgba(148, 163, 184, 0.25)',
+          line: 'rgba(38, 52, 73, 0.3)',
+          hoverParticle: 'rgba(59, 130, 246, 0.6)'
         };
       }
     };
