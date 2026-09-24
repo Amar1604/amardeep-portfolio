@@ -10,8 +10,10 @@ export const WebGLBackground = ({ theme = 'dark' }) => {
 
     const isDark = theme === 'dark';
 
-    // Scene & Renderer
+    // Scene, Fog & Renderer
     const scene = new THREE.Scene();
+    scene.fog = new THREE.FogExp2(isDark ? 0x0b1120 : 0xf8fafc, 0.0035);
+
     const camera = new THREE.PerspectiveCamera(
       60,
       window.innerWidth / window.innerHeight,
@@ -29,50 +31,58 @@ export const WebGLBackground = ({ theme = 'dark' }) => {
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
 
-    // Colors (Midnight Slate & Royal Blue Palette)
-    const particleColor = isDark ? 0x94a3b8 : 0x64748b;
-    const gridColor = isDark ? 0x263449 : 0xe2e8f0;
+    // Vibrant Cyber Aesthetic Colors
+    const gridColor = isDark ? 0x2563eb : 0x93c5fd; // Vivid Royal Blue grid
+    const cyanStarColor = isDark ? 0x38bdf8 : 0x0284c7; // Electric Cyan
+    const whiteStarColor = isDark ? 0xffffff : 0x475569; // Crisp Diamond
 
-    // --- 1. Starfield / Spatial Particle Nebula ---
-    const starCount = 280;
+    // --- 1. Dual-Layer Spatial Particle Nebula ---
+    const starCount = 320;
     const starPositions = new Float32Array(starCount * 3);
-    const starOriginalZ = new Float32Array(starCount);
+    const starColors = new Float32Array(starCount * 3);
+
+    const cyanC = new THREE.Color(cyanStarColor);
+    const whiteC = new THREE.Color(whiteStarColor);
 
     for (let i = 0; i < starCount; i++) {
       const i3 = i * 3;
-      starPositions[i3] = (Math.random() - 0.5) * 350;
-      starPositions[i3 + 1] = (Math.random() - 0.5) * 250;
-      const z = (Math.random() - 0.5) * 200;
-      starPositions[i3 + 2] = z;
-      starOriginalZ[i] = z;
+      starPositions[i3] = (Math.random() - 0.5) * 380;
+      starPositions[i3 + 1] = (Math.random() - 0.5) * 280;
+      starPositions[i3 + 2] = (Math.random() - 0.5) * 220;
+
+      const chosenColor = Math.random() > 0.4 ? cyanC : whiteC;
+      starColors[i3] = chosenColor.r;
+      starColors[i3 + 1] = chosenColor.g;
+      starColors[i3 + 2] = chosenColor.b;
     }
 
     const starGeo = new THREE.BufferGeometry();
     starGeo.setAttribute('position', new THREE.BufferAttribute(starPositions, 3));
+    starGeo.setAttribute('color', new THREE.BufferAttribute(starColors, 3));
 
     const starMat = new THREE.PointsMaterial({
-      color: particleColor,
-      size: isDark ? 1.0 : 1.2,
+      size: isDark ? 1.25 : 1.4,
+      vertexColors: true,
       transparent: true,
-      opacity: isDark ? 0.35 : 0.25,
+      opacity: isDark ? 0.55 : 0.35,
       blending: isDark ? THREE.AdditiveBlending : THREE.NormalBlending
     });
 
     const starField = new THREE.Points(starGeo, starMat);
     scene.add(starField);
 
-    // --- 2. Perspective Wave Cyber Plane ---
-    const gridSegmentsX = 35;
-    const gridSegmentsY = 35;
-    const planeGeo = new THREE.PlaneGeometry(280, 280, gridSegmentsX, gridSegmentsY);
+    // --- 2. Perspective Cyber Wave Terrain Grid ---
+    const gridSegmentsX = 40;
+    const gridSegmentsY = 40;
+    const planeGeo = new THREE.PlaneGeometry(300, 300, gridSegmentsX, gridSegmentsY);
     planeGeo.rotateX(-Math.PI / 2.3);
-    planeGeo.translate(0, -60, -30);
+    planeGeo.translate(0, -65, -30);
 
     const planeMat = new THREE.MeshBasicMaterial({
       color: gridColor,
       wireframe: true,
       transparent: true,
-      opacity: isDark ? 0.22 : 0.15
+      opacity: isDark ? 0.28 : 0.18
     });
 
     const wavePlane = new THREE.Mesh(planeGeo, planeMat);
@@ -89,8 +99,8 @@ export const WebGLBackground = ({ theme = 'dark' }) => {
     let targetCameraY = 0;
 
     const handleMouseMove = (e) => {
-      mouseX = (e.clientX / window.innerWidth - 0.5) * 20;
-      mouseY = (e.clientY / window.innerHeight - 0.5) * -20;
+      mouseX = (e.clientX / window.innerWidth - 0.5) * 22;
+      mouseY = (e.clientY / window.innerHeight - 0.5) * -22;
     };
 
     const handleScroll = () => {
@@ -117,24 +127,24 @@ export const WebGLBackground = ({ theme = 'dark' }) => {
       const elapsed = clock.getElapsedTime();
 
       // Camera Parallax
-      targetCameraX = mouseX * 0.4;
-      targetCameraY = mouseY * 0.4 - (scrollY * 0.04);
+      targetCameraX = mouseX * 0.45;
+      targetCameraY = mouseY * 0.45 - scrollY * 0.035;
       camera.position.x += (targetCameraX - camera.position.x) * 0.05;
       camera.position.y += (targetCameraY - camera.position.y) * 0.05;
 
       // Subtle slow rotation of starfield
-      starField.rotation.y = elapsed * 0.015;
-      starField.rotation.x = elapsed * 0.008;
+      starField.rotation.y = elapsed * 0.018;
+      starField.rotation.x = elapsed * 0.009;
 
-      // Undulate Cyber Grid Wave
+      // Undulate Cyber Grid Wave with fluid harmonic motion
       const positions = planeGeo.attributes.position.array;
       for (let i = 0; i < positions.length; i += 3) {
         const ox = originalPositions[i];
         const oz = originalPositions[i + 2];
         positions[i + 1] =
           originalPositions[i + 1] +
-          Math.sin(ox * 0.06 + elapsed * 1.5) * 3.5 +
-          Math.cos(oz * 0.06 + elapsed * 1.2) * 3.0;
+          Math.sin(ox * 0.055 + elapsed * 1.6) * 3.8 +
+          Math.cos(oz * 0.055 + elapsed * 1.3) * 3.2;
       }
       planeGeo.attributes.position.needsUpdate = true;
 

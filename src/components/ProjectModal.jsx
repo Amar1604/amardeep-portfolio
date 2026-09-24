@@ -1,13 +1,17 @@
 import React, { useEffect } from 'react';
 import { soundFX } from '../utils/soundFX';
 
-export const ProjectModal = ({ project, onClose }) => {
+export const ProjectModal = ({ project, onClose, onPrev, onNext }) => {
   useEffect(() => {
     soundFX.playModalOpen();
     const handleKeyDown = (e) => {
       if (e.key === 'Escape') {
         soundFX.playClick();
         onClose();
+      } else if (e.key === 'ArrowLeft' && onPrev) {
+        onPrev();
+      } else if (e.key === 'ArrowRight' && onNext) {
+        onNext();
       }
     };
     document.body.style.overflow = 'hidden';
@@ -17,7 +21,7 @@ export const ProjectModal = ({ project, onClose }) => {
       document.body.style.overflow = '';
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, [onClose]);
+  }, [onClose, onPrev, onNext]);
 
   if (!project) return null;
 
@@ -33,23 +37,49 @@ export const ProjectModal = ({ project, onClose }) => {
         role="dialog"
         aria-modal="true"
       >
-        {/* Holographic Header Bar */}
+        {/* Holographic Header Bar with Project Navigation */}
         <div className="modal-holo-header">
           <div className="holo-status">
             <span className="telemetry-live-dot"></span>
             <span>SYSTEM_TELEMETRY // SPEC_ID: {project.id ? project.id.toUpperCase() : 'CORE_01'}</span>
           </div>
-          <button
-            className="modal-close-holo"
-            onClick={() => {
-              soundFX.playClick();
-              onClose();
-            }}
-            aria-label="Close modal"
-            data-cursor="CLOSE"
-          >
-            <span>[ESC // CLOSE]</span>
-          </button>
+
+          <div className="modal-header-controls">
+            {onPrev && onNext && (
+              <div className="modal-nav-arrows">
+                <button
+                  type="button"
+                  className="modal-nav-btn"
+                  onClick={onPrev}
+                  title="Previous Project (Arrow Left)"
+                  data-cursor="PREV"
+                >
+                  &larr; PREV
+                </button>
+                <button
+                  type="button"
+                  className="modal-nav-btn"
+                  onClick={onNext}
+                  title="Next Project (Arrow Right)"
+                  data-cursor="NEXT"
+                >
+                  NEXT &rarr;
+                </button>
+              </div>
+            )}
+
+            <button
+              className="modal-close-holo"
+              onClick={() => {
+                soundFX.playClick();
+                onClose();
+              }}
+              aria-label="Close modal"
+              data-cursor="CLOSE"
+            >
+              <span>[ESC // CLOSE]</span>
+            </button>
+          </div>
         </div>
 
         <div className="modal-img-wrapper-holo">

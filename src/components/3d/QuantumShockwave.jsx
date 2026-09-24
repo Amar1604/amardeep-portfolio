@@ -18,65 +18,77 @@ export const QuantumShockwave = () => {
       constructor(x, y) {
         this.x = x;
         this.y = y;
-        this.radius = 5;
-        this.maxRadius = 160;
-        this.opacity = 0.8;
-        this.lineWidth = 3.5;
+        this.radius = 4;
+        this.maxRadius = 175;
+        this.opacity = 0.85;
+        this.lineWidth = 3.6;
         this.particles = [];
 
-        // Spawn 20 particle sparks
-        for (let i = 0; i < 20; i++) {
+        // Spawn 24 glowing sparks
+        for (let i = 0; i < 24; i++) {
           const angle = Math.random() * Math.PI * 2;
-          const speed = Math.random() * 4 + 2;
+          const speed = Math.random() * 4.5 + 2.5;
+          const isCyan = Math.random() > 0.4;
           this.particles.push({
             x,
             y,
             vx: Math.cos(angle) * speed,
             vy: Math.sin(angle) * speed,
             alpha: 1,
-            size: Math.random() * 2.5 + 1.5
+            size: Math.random() * 2.8 + 1.2,
+            color: isCyan ? '6, 182, 212' : '99, 102, 241'
           });
         }
       }
 
       update() {
-        this.radius += (this.maxRadius - this.radius) * 0.12;
-        this.opacity -= 0.035;
-        this.lineWidth = Math.max(0.5, this.lineWidth - 0.08);
+        this.radius += (this.maxRadius - this.radius) * 0.13;
+        this.opacity -= 0.032;
+        this.lineWidth = Math.max(0.5, this.lineWidth - 0.075);
 
         this.particles.forEach((p) => {
           p.x += p.vx;
           p.y += p.vy;
-          p.vx *= 0.95;
-          p.vy *= 0.95;
-          p.alpha -= 0.04;
+          p.vx *= 0.94;
+          p.vy *= 0.94;
+          p.alpha -= 0.038;
         });
       }
 
       draw() {
         if (this.opacity <= 0) return;
 
-        // Draw clean minimalist ripple
         ctx.save();
+
+        // 1. Primary Leading Ring: Electric Cyan
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-        ctx.strokeStyle = `rgba(59, 130, 246, ${Math.max(0, this.opacity * 0.7)})`;
-        ctx.lineWidth = this.lineWidth * 0.8;
+        ctx.strokeStyle = `rgba(6, 182, 212, ${Math.max(0, this.opacity * 0.85)})`;
+        ctx.lineWidth = this.lineWidth;
         ctx.stroke();
 
-        // Draw inner white highlight ring
+        // 2. Secondary Trailing Ring: Royal Sapphire
         ctx.beginPath();
-        ctx.arc(this.x, this.y, this.radius * 0.9, 0, Math.PI * 2);
-        ctx.strokeStyle = `rgba(255, 255, 255, ${Math.max(0, this.opacity * 0.5)})`;
+        ctx.arc(this.x, this.y, Math.max(0, this.radius - 8), 0, Math.PI * 2);
+        ctx.strokeStyle = `rgba(59, 130, 246, ${Math.max(0, this.opacity * 0.55)})`;
+        ctx.lineWidth = this.lineWidth * 0.7;
+        ctx.stroke();
+
+        // 3. Inner White Core Glow Ring
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, Math.max(0, this.radius * 0.88), 0, Math.PI * 2);
+        ctx.strokeStyle = `rgba(255, 255, 255, ${Math.max(0, this.opacity * 0.6)})`;
         ctx.lineWidth = this.lineWidth * 0.4;
         ctx.stroke();
 
-        // Draw subtle particles
+        // 4. Glowing Radiant Particles
         this.particles.forEach((p) => {
           if (p.alpha > 0) {
             ctx.beginPath();
-            ctx.arc(p.x, p.y, p.size * 0.8, 0, Math.PI * 2);
-            ctx.fillStyle = `rgba(59, 130, 246, ${p.alpha * 0.6})`;
+            ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(${p.color}, ${p.alpha * 0.85})`;
+            ctx.shadowColor = `rgba(${p.color}, 0.8)`;
+            ctx.shadowBlur = 6;
             ctx.fill();
           }
         });
@@ -86,8 +98,7 @@ export const QuantumShockwave = () => {
     }
 
     const handleClick = (e) => {
-      // Trigger shockwave on CTA buttons or primary elements
-      const target = e.target.closest('.btn, .project-card, .term-chip, .logo');
+      const target = e.target.closest('.btn, .project-card, .term-chip, .logo, .switcher-btn, .matcher-pill-btn');
       if (target) {
         soundFX.playClick();
         rings.push(new ShockwaveRing(e.clientX, e.clientY));

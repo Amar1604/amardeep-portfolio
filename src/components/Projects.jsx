@@ -39,6 +39,20 @@ export const Projects = () => {
     return matchesCategory && matchesTag;
   });
 
+  const handleNextProject = () => {
+    soundFX.playClick();
+    const currentIndex = filteredProjects.findIndex((p) => p.id === selectedProject?.id);
+    const nextIndex = (currentIndex + 1) % filteredProjects.length;
+    setSelectedProject(filteredProjects[nextIndex]);
+  };
+
+  const handlePrevProject = () => {
+    soundFX.playClick();
+    const currentIndex = filteredProjects.findIndex((p) => p.id === selectedProject?.id);
+    const prevIndex = (currentIndex - 1 + filteredProjects.length) % filteredProjects.length;
+    setSelectedProject(filteredProjects[prevIndex]);
+  };
+
   return (
     <section id="projects">
       <div className="container">
@@ -104,6 +118,8 @@ export const Projects = () => {
           <ProjectModal
             project={selectedProject}
             onClose={() => setSelectedProject(null)}
+            onPrev={handlePrevProject}
+            onNext={handleNextProject}
           />
         )}
       </div>

@@ -22,41 +22,71 @@ export const Floating3DElements = ({ theme = 'dark' }) => {
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
     mount.appendChild(renderer.domElement);
 
-    // Color (Clean Minimalist Slate/Zinc)
-    const shapeColor = isDark ? 0x52525b : 0xa1a1aa;
-    const shapeMat = new THREE.MeshBasicMaterial({
-      color: shapeColor,
-      wireframe: true,
-      transparent: true,
-      opacity: isDark ? 0.25 : 0.15
-    });
+    // Dynamic Holographic Color Palette
+    const cyanColor = isDark ? 0x00f0ff : 0x0284c7;
+    const sapphireColor = isDark ? 0x3b82f6 : 0x2563eb;
+    const indigoColor = isDark ? 0x6366f1 : 0x4f46e5;
+    const violetColor = isDark ? 0x8b5cf6 : 0x7c3aed;
 
     // Create 4 floating geometric nodes at peripheral coordinates
     const shapes = [];
 
-    const geo1 = new THREE.OctahedronGeometry(2.5, 0);
-    const mesh1 = new THREE.Mesh(geo1, shapeMat);
-    mesh1.position.set(-22, 12, -5);
-    scene.add(mesh1);
-    shapes.push({ mesh: mesh1, speedX: 0.008, speedY: 0.012, speedZ: 0.005 });
+    const createPrimitive = (geo, color, opacity, pos, speeds) => {
+      const mat = new THREE.MeshBasicMaterial({
+        color,
+        wireframe: true,
+        transparent: true,
+        opacity: isDark ? opacity : opacity * 0.7
+      });
+      const mesh = new THREE.Mesh(geo, mat);
+      mesh.position.set(pos.x, pos.y, pos.z);
+      scene.add(mesh);
+      return { mesh, geo, mat, ...speeds };
+    };
 
-    const geo2 = new THREE.TorusGeometry(2.2, 0.5, 8, 24);
-    const mesh2 = new THREE.Mesh(geo2, shapeMat);
-    mesh2.position.set(24, -10, -8);
-    scene.add(mesh2);
-    shapes.push({ mesh: mesh2, speedX: -0.01, speedY: 0.008, speedZ: 0.006 });
+    // 1. Top-Left: Electric Cyan Octahedron
+    shapes.push(
+      createPrimitive(
+        new THREE.OctahedronGeometry(2.6, 0),
+        cyanColor,
+        0.45,
+        { x: -22, y: 12, z: -5 },
+        { speedX: 0.008, speedY: 0.012, speedZ: 0.005 }
+      )
+    );
 
-    const geo3 = new THREE.IcosahedronGeometry(2.0, 0);
-    const mesh3 = new THREE.Mesh(geo3, shapeMat);
-    mesh3.position.set(-20, -18, -10);
-    scene.add(mesh3);
-    shapes.push({ mesh: mesh3, speedX: 0.006, speedY: -0.009, speedZ: 0.007 });
+    // 2. Bottom-Right: Royal Sapphire Torus
+    shapes.push(
+      createPrimitive(
+        new THREE.TorusGeometry(2.3, 0.5, 10, 28),
+        sapphireColor,
+        0.4,
+        { x: 24, y: -10, z: -8 },
+        { speedX: -0.01, speedY: 0.008, speedZ: 0.006 }
+      )
+    );
 
-    const geo4 = new THREE.TorusGeometry(1.8, 0.4, 8, 20);
-    const mesh4 = new THREE.Mesh(geo4, shapeMat);
-    mesh4.position.set(22, 16, -12);
-    scene.add(mesh4);
-    shapes.push({ mesh: mesh4, speedX: 0.009, speedY: 0.007, speedZ: -0.005 });
+    // 3. Bottom-Left: Cyber Indigo Icosahedron
+    shapes.push(
+      createPrimitive(
+        new THREE.IcosahedronGeometry(2.2, 0),
+        indigoColor,
+        0.42,
+        { x: -20, y: -18, z: -10 },
+        { speedX: 0.006, speedY: -0.009, speedZ: 0.007 }
+      )
+    );
+
+    // 4. Top-Right: Electric Violet Torus
+    shapes.push(
+      createPrimitive(
+        new THREE.TorusGeometry(1.9, 0.4, 10, 24),
+        violetColor,
+        0.38,
+        { x: 22, y: 16, z: -12 },
+        { speedX: 0.009, speedY: 0.007, speedZ: -0.005 }
+      )
+    );
 
     let scrollY = window.scrollY || 0;
     const handleScroll = () => {
@@ -81,8 +111,7 @@ export const Floating3DElements = ({ theme = 'dark' }) => {
         item.mesh.rotation.z += item.speedZ;
 
         // Gentle scroll-based translation offset
-        const scrollFactor = (scrollY * 0.02) * (idx % 2 === 0 ? 1 : -1);
-        item.mesh.position.y += Math.sin(Date.now() * 0.001 + idx) * 0.02;
+        item.mesh.position.y += Math.sin(Date.now() * 0.0012 + idx) * 0.022;
       });
 
       renderer.render(scene, camera);
@@ -96,11 +125,10 @@ export const Floating3DElements = ({ theme = 'dark' }) => {
       if (mount.contains(renderer.domElement)) {
         mount.removeChild(renderer.domElement);
       }
-      geo1.dispose();
-      geo2.dispose();
-      geo3.dispose();
-      geo4.dispose();
-      shapeMat.dispose();
+      shapes.forEach((s) => {
+        s.geo.dispose();
+        s.mat.dispose();
+      });
       renderer.dispose();
     };
   }, [theme]);
