@@ -6,7 +6,7 @@ export const projectsData = [
     fullDesc: "BudgetBuddy is a production-grade full-stack personal finance and wealth management platform engineered during the Infosys Springboard Virtual Internship 7.0 (Batch 1 Capstone). Built with a decoupled React 19/Vite frontend and an asynchronous Django REST Framework backend, it features secure JWT authentication, Google and GitHub OAuth2 integration, consolidated dashboard APIs that reduced database queries by 70%, constant-memory streaming CSV exports, and comprehensive automated test suites (68 Django unit tests + 7 Playwright E2E suites).",
     category: "fullstack",
     featured: true,
-    tags: ["React 19", "Vite", "Django REST", "Python", "PostgreSQL", "JWT & OAuth2"],
+    tags: ["React 19", "Vite", "Django REST", "Vercel", "PostgreSQL / Neon", "JWT & OAuth2"],
     image: "assets/images/project_novacommerce.png",
     github: "https://github.com/Amar1604/BudgetBuddy",
     live: "https://budget-buddy-nine-teal.vercel.app",
@@ -14,6 +14,7 @@ export const projectsData = [
     features: [
       "Decoupled React 19/Vite frontend with an asynchronous Django REST Framework backend.",
       "Consolidated dashboard API reducing database roundtrips and queries by 70%.",
+      "Production deployment on Vercel with automated Git CI/CD and edge content distribution.",
       "Robust dual authentication: JWT tokens plus Google and GitHub OAuth2 sign-in.",
       "Constant-memory streaming CSV exports for high-volume financial transaction history.",
       "High reliability engineering with 68 Django unit tests and 7 automated Playwright E2E suites."

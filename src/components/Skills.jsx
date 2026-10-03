@@ -14,25 +14,25 @@ const roleProfiles = [
     id: 'fullstack',
     label: '[FULL-STACK ENGINEER]',
     fit: '98% RELEVANT',
-    matchingSkills: ['React.js / React 19', 'JavaScript (ES6+) & TypeScript', 'Tailwind CSS & CSS3 / HTML5', 'Vite & Next.js', 'Django REST Framework', 'Node.js & RESTful APIs', 'PostgreSQL & MySQL', 'JWT & OAuth2 Authentication']
+    matchingSkills: ['React.js / React 19', 'JavaScript (ES6+) & TypeScript', 'Tailwind CSS & CSS3 / HTML5', 'Vite & Next.js', 'Django REST Framework', 'PostgreSQL & Neon DB', 'Supabase & Firebase', 'Vercel & Render (CI/CD)', 'JWT & OAuth2 Authentication']
   },
   {
     id: 'mobile',
     label: '[MOBILE APP BUILDER]',
     fit: '96% RELEVANT',
-    matchingSkills: ['Flutter Framework', 'Dart Programming', 'Cross-Platform (iOS & Android)', 'Mobile UI/UX & State Management', 'Firebase (Auth / Firestore)', 'Node.js & RESTful APIs']
+    matchingSkills: ['Flutter Framework', 'Dart Programming', 'Cross-Platform (iOS & Android)', 'Mobile UI/UX & State Management', 'Supabase & Firebase']
   },
   {
     id: 'backend',
     label: '[BACKEND & CLOUD ARCHITECT]',
     fit: '94% RELEVANT',
-    matchingSkills: ['Django REST Framework', 'FastAPI & Python', 'Node.js & RESTful APIs', 'PostgreSQL & MySQL', 'SQLite & MongoDB', 'JWT & OAuth2 Authentication', 'Docker & Linux Environments']
+    matchingSkills: ['Django REST Framework', 'Python & System Architecture', 'FastAPI & Microservices', 'PostgreSQL & Neon DB', 'Supabase & Firebase', 'Vercel & Render (CI/CD)', 'JWT & OAuth2 Authentication', 'Docker & Linux Environments']
   },
   {
     id: 'ai',
     label: '[AI & SYSTEM INTEGRATOR]',
     fit: '92% RELEVANT',
-    matchingSkills: ['Ollama (Gemma3) & Local LLMs', 'OpenCV & Computer Vision', 'FastAPI & Python', 'Git, GitHub & CI/CD', 'Postman, Pytest & Playwright']
+    matchingSkills: ['Ollama (Gemma3) & Local LLMs', 'OpenCV & Computer Vision', 'FastAPI & Microservices', 'Python & System Architecture', 'Git, GitHub & Version Control', 'Postman, Pytest & Playwright']
   }
 ];
 

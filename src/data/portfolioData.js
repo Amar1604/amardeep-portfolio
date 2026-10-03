@@ -97,10 +97,10 @@ export const skillsData = [
   {
     category: "Databases & Cloud",
     skills: [
-      { name: "PostgreSQL & MySQL", level: "82%", tier: "RELATIONAL CORE", projectProof: "Aggregated Queries & BudgetBuddy" },
-      { name: "Firebase (Auth / Firestore)", level: "78%", tier: "REAL-TIME CLOUD", projectProof: "SafeGuard Emergency Live Sync" },
-      { name: "SQLite & Relational Schemas", level: "80%", tier: "DATA MODELING", projectProof: "Normalized Schemas & Indexing" },
-      { name: "Docker & Linux Environments", level: "70%", tier: "INFRASTRUCTURE", projectProof: "Containerization & CLI Tooling" }
+      { name: "PostgreSQL & Neon DB", level: "84%", tier: "SERVERLESS RELATIONAL", projectProof: "Aggregated Queries, Branching & BudgetBuddy" },
+      { name: "Supabase & Firebase", level: "82%", tier: "CLOUD BaaS & REALTIME", projectProof: "Auth, Realtime Data Sync & SafeGuard" },
+      { name: "Vercel & Render (CI/CD)", level: "85%", tier: "PRODUCTION DEPLOYMENT", projectProof: "Automated Git Deploys & Edge CDN (BudgetBuddy)" },
+      { name: "Docker & Linux Environments", level: "72%", tier: "INFRASTRUCTURE", projectProof: "Containerized Workflows & CLI Tooling" }
     ]
   },
   {
