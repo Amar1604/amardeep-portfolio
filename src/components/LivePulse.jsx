@@ -26,10 +26,10 @@ export const LivePulse = () => {
       }).format(now);
 
       const h = parseInt(hour, 10);
-      if (h >= 5 && h < 12) setGreeting('SYSTEM ACTIVE // MORNING');
-      else if (h >= 12 && h < 17) setGreeting('SYSTEM ACTIVE // AFTERNOON');
-      else if (h >= 17 && h < 22) setGreeting('SYSTEM ACTIVE // EVENING');
-      else setGreeting('SYSTEM ACTIVE // NIGHT OWL');
+      if (h >= 5 && h < 12) setGreeting('Online &bull; Morning');
+      else if (h >= 12 && h < 17) setGreeting('Online &bull; Afternoon');
+      else if (h >= 17 && h < 22) setGreeting('Online &bull; Evening');
+      else setGreeting('Online &bull; Night Owl');
     };
 
     updateTime();
@@ -43,32 +43,32 @@ export const LivePulse = () => {
         <div className="pulse-live-indicator">
           <span className="live-ring"></span>
           <span className="live-core"></span>
-          <span className="pulse-live-text">REAL-TIME TELEMETRY</span>
+          <span className="pulse-live-text">CURRENT STATUS</span>
         </div>
-        <span className="pulse-greeting-badge">{greeting}</span>
+        <span className="pulse-greeting-badge" dangerouslySetInnerHTML={{ __html: greeting }}></span>
       </div>
 
       <div className="pulse-grid">
         {/* Location & Local Clock */}
         <div className="pulse-item">
-          <div className="pulse-tag-label">[LOC] CURRENT BASE</div>
+          <div className="pulse-tag-label">LOCATION</div>
           <div className="pulse-item-val">Meerut, Uttar Pradesh, India</div>
         </div>
 
         <div className="pulse-item">
-          <div className="pulse-tag-label">[IST] LOCAL TIME (CLOCK)</div>
-          <div className="pulse-item-val pulse-time-glow">{timeStr || 'SYNCHRONIZING...'}</div>
+          <div className="pulse-tag-label">LOCAL TIME (IST)</div>
+          <div className="pulse-item-val pulse-time-glow">{timeStr || 'Synchronizing...'}</div>
         </div>
 
         {/* Status */}
         <div className="pulse-item">
-          <div className="pulse-tag-label">[AVAILABILITY] STATUS</div>
+          <div className="pulse-tag-label">AVAILABILITY</div>
           <div className="pulse-item-val text-green-accent">Open for Full-Time Roles &amp; Internships</div>
         </div>
 
         {/* Current Learning / Exploring */}
         <div className="pulse-item">
-          <div className="pulse-tag-label">[FOCUS] CURRENTLY BUILDING</div>
+          <div className="pulse-tag-label">CURRENT FOCUS</div>
           <div className="pulse-item-val">Local LLMs (Ollama) &bull; Flutter 3 &bull; Three.js</div>
         </div>
       </div>

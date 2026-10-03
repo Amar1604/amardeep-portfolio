@@ -11,17 +11,17 @@ export const Contact = () => {
   const topics = [
     {
       id: 'fulltime',
-      label: '[FULL-TIME / INTERNSHIP ROLE]',
+      label: 'Full-Time / Internship Role',
       template: "Hi Amardeep, we have an exciting engineering opportunity and would love to review your background and discuss how your skills align with our team."
     },
     {
       id: 'project',
-      label: '[PROJECT / AI COLLABORATION]',
+      label: 'Project Collaboration',
       template: "Hi Amardeep, I saw your projects (BudgetBuddy / COFE) and would love to collaborate on a software engineering / AI project with you."
     },
     {
       id: 'coffee',
-      label: '[TECH CONNECT / CASUAL CHAT]',
+      label: 'Casual Tech Chat',
       template: "Hey Amardeep! Loved checking out your portfolio. Would love to connect for a casual virtual chat and discuss modern tech stacks."
     }
   ];
@@ -78,7 +78,7 @@ export const Contact = () => {
           soundFX.playWarp();
           setStatus({
             type: 'success',
-            message: 'MESSAGE DELIVERED: Thank you for reaching out! Your note has been delivered directly to Amardeep. I usually respond within 24 hours.'
+            message: 'Thank you for reaching out! Your message has been sent. I will get back to you shortly.'
           });
           setFormData({ name: '', email: '', message: '' });
           setSelectedTopic(null);
@@ -110,7 +110,7 @@ export const Contact = () => {
       setIsSubmitting(false);
       setStatus({
         type: 'success',
-        message: 'MAIL CLIENT LAUNCHED: Your message is prefilled in your default email client. (Note: Add VITE_WEB3FORMS_ACCESS_KEY in .env for direct silent background delivery).',
+        message: 'Your message has been prefilled in your default email client.',
         showMailto: true
       });
       setTimeout(() => setStatus(null), 9000);
@@ -123,7 +123,7 @@ export const Contact = () => {
         <div className="section-header-center">
           <div className="hero-badge-container">
             <span className="hero-subtitle">
-              // OPEN DIALOGUE &bull; DIRECT CONNECTION
+              Get in Touch &bull; Let's Connect
             </span>
           </div>
           <h2 className="section-title">
@@ -137,7 +137,7 @@ export const Contact = () => {
         <div className="contact-wrapper">
           {/* Contact Details Column */}
           <div className="glass-card contact-info-card">
-            <span className="contact-card-tag">[CHANNELS // DIRECT DISPATCH]</span>
+            <span className="contact-card-tag">Direct Channels</span>
             <h3>Let's Build Something Great</h3>
             <p>
               I value clear communication, continuous collaboration, and building meaningful tech. Drop a note here or connect through any of my verified channels.
@@ -145,7 +145,7 @@ export const Contact = () => {
 
             <div className="contact-details">
               <div className="contact-detail-item">
-                <span className="contact-channel-badge">[EMAIL]</span>
+                <span className="contact-channel-badge">Email</span>
                 <div>
                   <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>PRIMARY INBOX</div>
                   <a href={`mailto:${personalInfo.email}`} onClick={() => soundFX.playClick()} data-cursor="EMAIL">
@@ -155,7 +155,7 @@ export const Contact = () => {
               </div>
 
               <div className="contact-detail-item">
-                <span className="contact-channel-badge">[TEL]</span>
+                <span className="contact-channel-badge">Phone</span>
                 <div>
                   <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>MOBILE NUMBER</div>
                   <a href={`tel:${personalInfo.phone}`} onClick={() => soundFX.playClick()} data-cursor="CALL">
@@ -165,7 +165,7 @@ export const Contact = () => {
               </div>
 
               <div className="contact-detail-item">
-                <span className="contact-channel-badge">[LOC]</span>
+                <span className="contact-channel-badge">Location</span>
                 <div>
                   <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>LOCATION BASE</div>
                   <span>{personalInfo.location}</span>
@@ -179,7 +179,7 @@ export const Contact = () => {
 
             {/* Verified Direct Profiles */}
             <div className="contact-social-bar" style={{ marginTop: '1.75rem' }}>
-              <span className="contact-social-label">// VERIFIED CHANNELS:</span>
+              <span className="contact-social-label">Social Profiles:</span>
               <div className="contact-social-buttons">
                 <a
                   href={personalInfo.github}
@@ -224,7 +224,7 @@ export const Contact = () => {
           <div className="glass-card">
             {/* Quick Conversation Starter Pills */}
             <div className="contact-topic-starter">
-              <span className="topic-starter-label">// CONVERSATION STARTERS:</span>
+              <span className="topic-starter-label">Quick Starters:</span>
               <div className="topic-pills-row">
                 {topics.map((t) => (
                   <button
@@ -243,7 +243,7 @@ export const Contact = () => {
 
             <form onSubmit={handleSubmit}>
               <div className="form-group">
-                <label htmlFor="name">NAME // IDENTIFIER</label>
+                <label htmlFor="name">Your Name</label>
                 <input
                   type="text"
                   id="name"
@@ -257,7 +257,7 @@ export const Contact = () => {
               </div>
 
               <div className="form-group">
-                <label htmlFor="email">EMAIL // RETURN ADDRESS</label>
+                <label htmlFor="email">Your Email</label>
                 <input
                   type="email"
                   id="email"
@@ -271,7 +271,7 @@ export const Contact = () => {
               </div>
 
               <div className="form-group">
-                <label htmlFor="message">MESSAGE // INQUIRY DETAILS</label>
+                <label htmlFor="message">Your Message</label>
                 <textarea
                   id="message"
                   name="message"
@@ -292,9 +292,9 @@ export const Contact = () => {
                 data-cursor="TRANSMIT"
               >
                 {isSubmitting ? (
-                  <span>[TRANSMITTING PACKET...]</span>
+                  <span>Sending Message...</span>
                 ) : (
-                  <span>[TRANSMIT MESSAGE -&gt;]</span>
+                  <span>Send Message &rarr;</span>
                 )}
               </button>
 
@@ -310,7 +310,7 @@ export const Contact = () => {
                         onClick={() => soundFX.playClick()}
                         data-cursor="EMAIL"
                       >
-                        [OPEN PRE-FILLED EMAIL IN APP -&gt;]
+                        Open in Email App &rarr;
                       </a>
                     </div>
                   )}

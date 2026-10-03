@@ -10,7 +10,7 @@ export const RecruiterDashboard = () => {
         <div className="section-header-center">
           <div className="hero-badge-container">
             <span className="hero-subtitle">
-              // TELEMETRY SNAPSHOT &bull; VERIFIED CREDENTIALS
+              Executive Summary &bull; Core Engineering Outcomes
             </span>
           </div>
           <h2 className="section-title">
@@ -25,7 +25,7 @@ export const RecruiterDashboard = () => {
         <div className="dashboard-grid">
           {recruiterStats.map((stat, idx) => (
             <div key={idx} className="glass-card stat-card" data-cursor="METRIC">
-              <div className="stat-card-badge">METRIC_{idx + 1}</div>
+              <div className="stat-card-badge">HIGHLIGHT 0{idx + 1}</div>
               <div className="stat-num">{stat.num}</div>
               <div className="stat-label">{stat.label}</div>
             </div>
@@ -53,7 +53,7 @@ export const RecruiterDashboard = () => {
             onMouseEnter={() => soundFX.playHover()}
             data-cursor="DOWNLOAD"
           >
-            <span>[DOWNLOAD ATS RESUME .PDF]</span>
+            <span>Download Verified Resume (PDF)</span>
           </a>
         </div>
       </div>

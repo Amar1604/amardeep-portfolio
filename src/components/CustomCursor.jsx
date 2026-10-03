@@ -3,7 +3,6 @@ import React, { useEffect, useState, useRef } from 'react';
 export const CustomCursor = () => {
   const [enabled, setEnabled] = useState(false);
   const [hovered, setHovered] = useState(false);
-  const [cursorText, setCursorText] = useState('');
   const [isMouseDown, setIsMouseDown] = useState(false);
 
   const dotRef = useRef(null);
@@ -27,22 +26,11 @@ export const CustomCursor = () => {
       }
 
       // Check if target or parent has interactive attributes
-      const target = e.target.closest('a, button, .project-card, .switcher-btn, .topic-pill-btn, .human-tab-btn, .kudos-btn, [data-cursor]');
+      const target = e.target.closest('a, button, .project-card, .switcher-btn, .topic-pill-btn, .human-tab-btn, .kudos-btn, input, textarea, select');
       if (target) {
         setHovered(true);
-        const customText = target.getAttribute('data-cursor');
-        if (customText) {
-          setCursorText(customText);
-        } else if (target.tagName.toLowerCase() === 'button' || target.getAttribute('role') === 'button') {
-          setCursorText('SELECT');
-        } else if (target.tagName.toLowerCase() === 'a') {
-          setCursorText('LINK');
-        } else {
-          setCursorText('');
-        }
       } else {
         setHovered(false);
-        setCursorText('');
       }
     };
 
@@ -55,8 +43,8 @@ export const CustomCursor = () => {
 
     // Smooth lerp loop for the trailing ring
     const render = () => {
-      ringPos.current.x += (mousePos.current.x - ringPos.current.x) * 0.18;
-      ringPos.current.y += (mousePos.current.y - ringPos.current.y) * 0.18;
+      ringPos.current.x += (mousePos.current.x - ringPos.current.x) * 0.2;
+      ringPos.current.y += (mousePos.current.y - ringPos.current.y) * 0.2;
 
       if (ringRef.current) {
         ringRef.current.style.transform = `translate3d(${ringPos.current.x}px, ${ringPos.current.y}px, 0)`;
@@ -82,16 +70,14 @@ export const CustomCursor = () => {
       {/* Precision inner center dot */}
       <div
         ref={dotRef}
-        className={`custom-cursor-dot ${isMouseDown ? 'cursor-down' : ''}`}
+        className={`custom-cursor-dot ${isMouseDown ? 'cursor-down' : ''} ${hovered ? 'cursor-hover' : ''}`}
       />
 
-      {/* Trailing interactive ring with contextual text badge */}
+      {/* Trailing interactive ring */}
       <div
         ref={ringRef}
-        className={`custom-cursor-ring ${hovered ? 'cursor-hover' : ''} ${isMouseDown ? 'cursor-down' : ''} ${cursorText ? 'has-text' : ''}`}
-      >
-        {cursorText && <span className="cursor-label-badge">{cursorText}</span>}
-      </div>
+        className={`custom-cursor-ring ${hovered ? 'cursor-hover' : ''} ${isMouseDown ? 'cursor-down' : ''}`}
+      />
     </div>
   );
 };

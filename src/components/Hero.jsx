@@ -66,7 +66,7 @@ export const Hero = ({ theme = 'dark' }) => {
           <div className="hero-badge-container">
             <span className="hero-subtitle">
               <span className="telemetry-live-dot" style={{ display: 'inline-block', marginRight: '6px' }}></span>
-              STATUS: AVAILABLE // {timeGreeting} &bull; FULL-TIME &amp; INTERNSHIPS
+              Available for Opportunities &bull; {timeGreeting} &bull; Full-Time &amp; Internships
             </span>
           </div>
 
@@ -86,7 +86,7 @@ export const Hero = ({ theme = 'dark' }) => {
 
           {/* Interactive Role Switcher Pills */}
           <div className="hero-role-selector">
-            <span className="role-selector-label">// QUICK FOCUS:</span>
+            <span className="role-selector-label">Focus Areas:</span>
             <div className="role-selector-chips">
               {roles.slice(0, 4).map((role, rIdx) => (
                 <button
@@ -139,8 +139,8 @@ export const Hero = ({ theme = 'dark' }) => {
               onMouseEnter={() => soundFX.playHover()}
               data-cursor="RESUME"
             >
-              <span>Download ATS Resume</span>
-              <span className="btn-file-tag">[.PDF]</span>
+              <span>Download Resume</span>
+              <span className="btn-file-tag">PDF</span>
             </a>
           </div>
         </div>

@@ -5,6 +5,7 @@ export const ProjectCard = ({ project, onSelect }) => {
   const cardRef = useRef(null);
   const [glareStyle, setGlareStyle] = useState({});
   const [transformStyle, setTransformStyle] = useState({});
+  const [cardTab, setCardTab] = useState('overview'); // 'overview' | 'capabilities' | 'architecture'
 
   const handleMouseMove = (e) => {
     if (!cardRef.current) return;
@@ -15,20 +16,20 @@ export const ProjectCard = ({ project, onSelect }) => {
     const height = rect.height;
 
     // Subtle 3D tilt
-    const rotX = ((height / 2 - y) / (height / 2)) * 6;
-    const rotY = ((x - width / 2) / (width / 2)) * 6;
+    const rotX = ((height / 2 - y) / (height / 2)) * 4;
+    const rotY = ((x - width / 2) / (width / 2)) * 4;
 
     const glareX = (x / width) * 100;
     const glareY = (y / height) * 100;
 
     setTransformStyle({
-      transform: `perspective(1000px) rotateX(${rotX.toFixed(2)}deg) rotateY(${rotY.toFixed(2)}deg) scale3d(1.015, 1.015, 1.015)`,
+      transform: `perspective(1000px) rotateX(${rotX.toFixed(2)}deg) rotateY(${rotY.toFixed(2)}deg) scale3d(1.01, 1.01, 1.01)`,
       transition: 'transform 0.1s ease-out'
     });
 
     setGlareStyle({
-      opacity: 0.22,
-      background: `radial-gradient(circle 280px at ${glareX}% ${glareY}%, rgba(59, 130, 246, 0.35), rgba(99, 102, 241, 0.15) 50%, transparent 80%)`
+      opacity: 0.28,
+      background: `radial-gradient(circle 320px at ${glareX}% ${glareY}%, rgba(96, 165, 250, 0.25), rgba(59, 130, 246, 0.08) 45%, transparent 75%)`
     });
   };
 
@@ -76,7 +77,7 @@ export const ProjectCard = ({ project, onSelect }) => {
         />
         {project.featured && (
           <div className="project-featured-badge card-layer-depth-2">
-            [FLAGSHIP // PRODUCTION]
+            Featured Flagship
           </div>
         )}
       </div>
@@ -99,57 +100,102 @@ export const ProjectCard = ({ project, onSelect }) => {
 
         {project.role && (
           <div className="card-role-badge">
-            <span className="card-role-glyph">// ROLE:</span> {project.role}
+            <span className="card-role-glyph">Role:</span> {project.role}
           </div>
         )}
 
-        {/* Untruncated full description */}
-        <p className="project-full-desc">{project.fullDesc || project.shortDesc}</p>
-
-        {/* Verified Benchmark Highlight */}
-        {project.metrics && (
-          <div className="card-benchmark-card">
-            <div className="card-benchmark-label">// VERIFIED BENCHMARK:</div>
-            <div className="card-benchmark-val">{project.metrics}</div>
-          </div>
-        )}
-
-        {/* Core Capabilities Bullets */}
-        {project.features && project.features.length > 0 && (
-          <div className="card-capabilities-section">
-            <div className="card-section-heading">// KEY CAPABILITIES:</div>
-            <ul className="card-capabilities-list">
-              {project.features.map((feat, fIdx) => (
-                <li key={fIdx}>
-                  <span className="card-bullet-glyph">&gt;&gt;</span>
-                  <span>{feat}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
-
-        {/* Technical Obstacle & Resolution */}
-        {project.challenges && (
-          <div className="card-challenge-section">
-            <div className="card-section-heading">// RESOLVED OBSTACLE:</div>
-            <p className="card-challenge-desc">{project.challenges}</p>
-          </div>
-        )}
-
-        {/* Direct GitHub Path */}
-        {githubUrl && (
-          <div className="card-repo-info">
-            <span className="card-repo-label">// REPO:</span>
-            <a
-              href={githubUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="card-repo-path"
-              onClick={() => soundFX.playClick()}
+        {/* Interactive Segmented Card Tabs */}
+        <div className="card-tab-nav" onClick={(e) => e.stopPropagation()}>
+          <button
+            type="button"
+            className={`card-tab-btn ${cardTab === 'overview' ? 'active' : ''}`}
+            onClick={() => {
+              soundFX.playClick();
+              setCardTab('overview');
+            }}
+          >
+            Overview
+          </button>
+          {project.features && project.features.length > 0 && (
+            <button
+              type="button"
+              className={`card-tab-btn ${cardTab === 'capabilities' ? 'active' : ''}`}
+              onClick={() => {
+                soundFX.playClick();
+                setCardTab('capabilities');
+              }}
             >
-              {githubUrl.replace('https://github.com/', '')}
-            </a>
+              Capabilities
+            </button>
+          )}
+          {(project.challenges || project.metrics) && (
+            <button
+              type="button"
+              className={`card-tab-btn ${cardTab === 'architecture' ? 'active' : ''}`}
+              onClick={() => {
+                soundFX.playClick();
+                setCardTab('architecture');
+              }}
+            >
+              Architecture &amp; Impact
+            </button>
+          )}
+        </div>
+
+        {/* Tab 1: Overview */}
+        {cardTab === 'overview' && (
+          <div className="card-tab-content animate-fade-in">
+            <p className="project-full-desc">{project.fullDesc || project.shortDesc}</p>
+            {project.metrics && (
+              <div className="card-benchmark-card">
+                <div className="card-benchmark-label">Key Impact &amp; Result:</div>
+                <div className="card-benchmark-val">{project.metrics}</div>
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* Tab 2: Key Capabilities */}
+        {cardTab === 'capabilities' && project.features && (
+          <div className="card-tab-content animate-fade-in">
+            <div className="card-capabilities-section">
+              <div className="card-section-heading">Key Capabilities:</div>
+              <ul className="card-capabilities-list">
+                {project.features.map((feat, fIdx) => (
+                  <li key={fIdx}>
+                    <span className="card-bullet-glyph">&bull;</span>
+                    <span>{feat}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        )}
+
+        {/* Tab 3: Architecture & Impact */}
+        {cardTab === 'architecture' && (
+          <div className="card-tab-content animate-fade-in">
+            {project.challenges && (
+              <div className="card-challenge-section">
+                <div className="card-section-heading">Technical Challenge &amp; Solution:</div>
+                <p className="card-challenge-desc">{project.challenges}</p>
+              </div>
+            )}
+
+            {githubUrl && (
+              <div className="card-repo-info">
+                <span className="card-repo-label">Repository:</span>
+                <a
+                  href={githubUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="card-repo-path"
+                  onClick={() => soundFX.playClick()}
+                >
+                  {githubUrl.replace('https://github.com/', '')}
+                </a>
+              </div>
+            )}
           </div>
         )}
       </div>

@@ -8,7 +8,7 @@ export const Achievements = () => {
         <div className="section-header-center">
           <div className="hero-badge-container">
             <span className="hero-subtitle">
-              // NATIONAL HACKATHONS &bull; ACCREDITATIONS
+              Honors &amp; Accreditations &bull; Competitive Engineering
             </span>
           </div>
           <h2 className="section-title">
@@ -23,7 +23,7 @@ export const Achievements = () => {
           {achievementsData.map((item, idx) => (
             <div key={idx} className="glass-card achievement-card" data-cursor="AWARD">
               <div className="achievement-index-badge">
-                [0{idx + 1}]
+                0{idx + 1}
               </div>
               <div className="achievement-content">
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.6rem', flexWrap: 'wrap', gap: '0.5rem' }}>

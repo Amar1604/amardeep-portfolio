@@ -69,7 +69,7 @@ export const OptimizationBenchmark = () => {
     <div className="glass-card benchmark-widget">
       <div className="benchmark-header">
         <div className="benchmark-title-group">
-          <span className="benchmark-tag">// LIVE ARCHITECTURE SIMULATOR</span>
+          <span className="benchmark-tag">Interactive Architecture Simulator</span>
           <h4>BudgetBuddy Database Query Optimization Benchmark</h4>
           <p className="benchmark-desc">
             Simulate real-world API throughput: Standard Multi-Query Endpoints vs Amardeep's Consolidated Django REST Architecture.
@@ -84,12 +84,12 @@ export const OptimizationBenchmark = () => {
               data-cursor="RUN"
               onMouseEnter={() => soundFX.playHover()}
             >
-              <span>[RUN COMPARATIVE BENCHMARK]</span>
+              <span>Run Comparative Benchmark</span>
             </button>
           ) : isRunning ? (
             <button className="btn btn-secondary btn-benchmark running" disabled>
               <span className="running-dot-pulse"></span>
-              <span>SIMULATING THROUGHPUT... {progress}%</span>
+              <span>Running Simulation... {progress}%</span>
             </button>
           ) : (
             <button
@@ -98,7 +98,7 @@ export const OptimizationBenchmark = () => {
               data-cursor="RESET"
               onMouseEnter={() => soundFX.playHover()}
             >
-              <span>[RESET BENCHMARK]</span>
+              <span>Reset Benchmark</span>
             </button>
           )}
         </div>

@@ -323,7 +323,7 @@ export const Hero3DCanvas = ({ theme = 'dark' }) => {
         aria-label="Interactive 3D Cyber Core"
       />
       <div className="hero-3d-hint">
-        <span className="pulse-indicator"></span> Drag to rotate &bull; Interactive 3D Quantum Core
+        <span className="pulse-indicator"></span> Drag to rotate &bull; Interactive 3D Tech Core
       </div>
     </div>
   );

@@ -5,9 +5,9 @@ export const HumanStory = () => {
   const [activeTab, setActiveTab] = useState('journey');
 
   const tabs = [
-    { id: 'journey', label: '01 // MY JOURNEY', tag: 'ORIGIN' },
-    { id: 'principles', label: '02 // ENGINEERING VALUES', tag: 'ETHOS' },
-    { id: 'beyond', label: '03 // BEYOND THE SCREEN', tag: 'INSPIRATION' }
+    { id: 'journey', label: 'My Journey', tag: 'ORIGIN' },
+    { id: 'principles', label: 'Engineering Philosophy', tag: 'ETHOS' },
+    { id: 'beyond', label: 'Beyond the Screen', tag: 'INSPIRATION' }
   ];
 
   const handleTabChange = (tabId) => {
@@ -35,7 +35,7 @@ export const HumanStory = () => {
         {activeTab === 'journey' && (
           <div className="story-tab-pane animate-fade-in">
             <div className="story-pane-header">
-              <span className="story-index-tag">[LOG_01 // THE TRAJECTORY]</span>
+              <span className="story-index-tag">Journey &amp; Milestones</span>
               <h4 className="story-heading">From "Hello World" to Building Production Systems</h4>
             </div>
             <p>
@@ -53,7 +53,7 @@ export const HumanStory = () => {
         {activeTab === 'principles' && (
           <div className="story-tab-pane animate-fade-in">
             <div className="story-pane-header">
-              <span className="story-index-tag">[LOG_02 // SYSTEM PRINCIPLES]</span>
+              <span className="story-index-tag">Core Principles</span>
               <h4 className="story-heading">How I Think, Architect &amp; Collaborate</h4>
             </div>
             <div className="principles-grid">
@@ -87,19 +87,19 @@ export const HumanStory = () => {
         {activeTab === 'beyond' && (
           <div className="story-tab-pane animate-fade-in">
             <div className="story-pane-header">
-              <span className="story-index-tag">[LOG_03 // PASSIONS]</span>
+              <span className="story-index-tag">Passions &amp; Interests</span>
               <h4 className="story-heading">What Keeps My Curiosity Fueled</h4>
             </div>
             <p>
               When I'm not writing code or debugging API responses, you'll usually find me exploring new tech articles, contributing to discussions in developer communities, or sketching out user flows for hackathon ideas.
             </p>
             <div className="beyond-tags-list">
-              <span className="beyond-pill">[FOCUS] Problem Solving &amp; Algorithms</span>
-              <span className="beyond-pill">[AI] Local LLMs &amp; Privacy-First AI</span>
-              <span className="beyond-pill">[MOBILE] Flutter UI/UX Design</span>
-              <span className="beyond-pill">[SPRINT] Hackathon Prototyping</span>
-              <span className="beyond-pill">[READING] System Design &amp; Architecture</span>
-              <span className="beyond-pill">[PEER] Developer Community Collaboration</span>
+              <span className="beyond-pill">Problem Solving &amp; Algorithms</span>
+              <span className="beyond-pill">Local LLMs &amp; Privacy-First AI</span>
+              <span className="beyond-pill">Flutter UI/UX Design</span>
+              <span className="beyond-pill">Hackathon Prototyping</span>
+              <span className="beyond-pill">System Design &amp; Architecture</span>
+              <span className="beyond-pill">Developer Community Collaboration</span>
             </div>
           </div>
         )}

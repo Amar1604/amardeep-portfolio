@@ -3,7 +3,8 @@
 class SoundFX {
   constructor() {
     this.audioCtx = null;
-    this.enabled = false;
+    this.enabled = typeof window !== 'undefined' ? localStorage.getItem('portfolio_sound') === 'true' : false;
+    this.lastHoverTime = 0;
   }
 
   initContext() {
@@ -20,6 +21,9 @@ class SoundFX {
 
   toggle() {
     this.enabled = !this.enabled;
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('portfolio_sound', String(this.enabled));
+    }
     if (this.enabled) {
       this.initContext();
       this.playPowerOn();
@@ -29,31 +33,38 @@ class SoundFX {
 
   setEnabled(val) {
     this.enabled = val;
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('portfolio_sound', String(this.enabled));
+    }
     if (this.enabled) {
       this.initContext();
     }
   }
 
-  // Soft sci-fi hover tick
+  // Soft subtle hover tick (throttled to avoid rapid spam)
   playHover() {
     if (!this.enabled) return;
+    const now = Date.now();
+    if (now - this.lastHoverTime < 100) return;
+    this.lastHoverTime = now;
+
     try {
       this.initContext();
       const osc = this.audioCtx.createOscillator();
       const gain = this.audioCtx.createGain();
 
       osc.type = 'sine';
-      osc.frequency.setValueAtTime(800, this.audioCtx.currentTime);
-      osc.frequency.exponentialRampToValueAtTime(1400, this.audioCtx.currentTime + 0.04);
+      osc.frequency.setValueAtTime(600, this.audioCtx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(900, this.audioCtx.currentTime + 0.03);
 
-      gain.gain.setValueAtTime(0.025, this.audioCtx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.0001, this.audioCtx.currentTime + 0.04);
+      gain.gain.setValueAtTime(0.015, this.audioCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.0001, this.audioCtx.currentTime + 0.03);
 
       osc.connect(gain);
       gain.connect(this.audioCtx.destination);
 
       osc.start();
-      osc.stop(this.audioCtx.currentTime + 0.04);
+      osc.stop(this.audioCtx.currentTime + 0.03);
     } catch (e) {
       // Ignore audio context errors
     }

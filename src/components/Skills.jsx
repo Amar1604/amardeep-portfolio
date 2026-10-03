@@ -6,32 +6,32 @@ import { soundFX } from '../utils/soundFX';
 const roleProfiles = [
   {
     id: 'all',
-    label: '[ALL TECHNOLOGIES]',
-    fit: '100% VERSATILE',
+    label: 'All Technologies',
+    fit: '100% Versatile',
     matchingSkills: []
   },
   {
     id: 'fullstack',
-    label: '[FULL-STACK ENGINEER]',
-    fit: '98% RELEVANT',
+    label: 'Full-Stack Engineer',
+    fit: '98% Match',
     matchingSkills: ['React.js / React 19', 'JavaScript (ES6+) & TypeScript', 'Tailwind CSS & CSS3 / HTML5', 'Vite & Next.js', 'Django REST Framework', 'PostgreSQL & Neon DB', 'Supabase & Firebase', 'Vercel & Render (CI/CD)', 'JWT & OAuth2 Authentication']
   },
   {
     id: 'mobile',
-    label: '[MOBILE APP BUILDER]',
-    fit: '96% RELEVANT',
+    label: 'Mobile Developer',
+    fit: '96% Match',
     matchingSkills: ['Flutter Framework', 'Dart Programming', 'Cross-Platform (iOS & Android)', 'Mobile UI/UX & State Management', 'Supabase & Firebase']
   },
   {
     id: 'backend',
-    label: '[BACKEND & CLOUD ARCHITECT]',
-    fit: '94% RELEVANT',
+    label: 'Backend & Cloud',
+    fit: '94% Match',
     matchingSkills: ['Django REST Framework', 'Python & System Architecture', 'FastAPI & Microservices', 'PostgreSQL & Neon DB', 'Supabase & Firebase', 'Vercel & Render (CI/CD)', 'JWT & OAuth2 Authentication', 'Docker & Linux Environments']
   },
   {
     id: 'ai',
-    label: '[AI & SYSTEM INTEGRATOR]',
-    fit: '92% RELEVANT',
+    label: 'AI & Systems',
+    fit: '92% Match',
     matchingSkills: ['Ollama (Gemma3) & Local LLMs', 'OpenCV & Computer Vision', 'FastAPI & Microservices', 'Python & System Architecture', 'Git, GitHub & Version Control', 'Postman, Pytest & Playwright']
   }
 ];
@@ -78,7 +78,7 @@ export const Skills = ({ theme = 'dark' }) => {
         <div className="section-header-center">
           <div className="hero-badge-container">
             <span className="hero-subtitle">
-              // PRODUCTION TOOLKIT &bull; VERIFIED PROFICIENCY
+              Core Competencies &bull; Technical Toolkit
             </span>
           </div>
           <h2 className="section-title">
@@ -96,7 +96,7 @@ export const Skills = ({ theme = 'dark' }) => {
               onMouseEnter={() => soundFX.playHover()}
               data-cursor="GRID"
             >
-              <span>[STRUCTURED MATRIX]</span>
+              <span>Matrix View</span>
             </button>
             <button
               className={`switcher-btn ${viewMode === '3d' ? 'active' : ''}`}
@@ -104,14 +104,14 @@ export const Skills = ({ theme = 'dark' }) => {
               onMouseEnter={() => soundFX.playHover()}
               data-cursor="3D"
             >
-              <span>[3D ORBITAL GALAXY]</span>
+              <span>3D Orbital View</span>
             </button>
           </div>
 
           {/* Interactive Role Matcher Toolbar */}
           <div className="skill-role-matcher-bar">
             <div className="matcher-header-row">
-              <span className="matcher-label">// RECRUITER ROLE MATCHER:</span>
+              <span className="matcher-label">Filter by Role Profile:</span>
               <span className="matcher-fit-badge">{activeProfile.fit}</span>
             </div>
             <div className="matcher-buttons-row">
@@ -140,7 +140,7 @@ export const Skills = ({ theme = 'dark' }) => {
                 className="skills-category glass-card skills-card-3d"
               >
                 <div className="skills-cat-header">
-                  <span className="skills-cat-index">[CAT_0{idx + 1}]</span>
+                  <span className="skills-cat-index">0{idx + 1}</span>
                   <h3>{cat.category}</h3>
                 </div>
 
@@ -161,28 +161,19 @@ export const Skills = ({ theme = 'dark' }) => {
                         }}
                         onMouseLeave={() => setHoveredSkill(null)}
                       >
-                        <div className="skill-info">
+                        <div className="skill-header-row">
                           <span className="skill-name">
                             {skill.name}
                             {isRoleMatch && selectedRole !== 'all' && (
                               <span className="skill-matched-dot" title="Core requirement for selected role">&bull; MATCH</span>
                             )}
                           </span>
-                          <span className="skill-level">{skill.level}</span>
-                        </div>
-                        <div className="skill-bar-bg">
-                          <div
-                            className="skill-bar-fill"
-                            style={{
-                              width: animateBars ? skill.level : '0%'
-                            }}
-                          />
+                          {skill.tier && <span className="skill-tier-badge">{skill.tier}</span>}
                         </div>
                         {skill.projectProof && (
                           <div className="skill-proof-row">
-                            <span className="skill-proof-tag">// PROVEN IN:</span>
+                            <span className="skill-proof-tag">Applied in:</span>
                             <span className="skill-proof-name">{skill.projectProof}</span>
-                            {skill.tier && <span className="skill-tier-badge">[{skill.tier}]</span>}
                           </div>
                         )}
                       </div>

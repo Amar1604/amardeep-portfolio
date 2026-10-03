@@ -8,7 +8,7 @@ export const Experience = () => {
         <div className="section-header-center">
           <div className="hero-badge-container">
             <span className="hero-subtitle">
-              // PRODUCTION TRACK RECORD &bull; INTERNSHIPS
+              Engineering Track Record &bull; Internships &amp; Roles
             </span>
           </div>
           <h2 className="section-title">
@@ -24,14 +24,14 @@ export const Experience = () => {
             <div key={idx} className="glass-card experience-card" data-cursor="EXP">
               <div className="exp-header">
                 <div className="exp-title">
-                  <span className="exp-index-tag">[EXP // {String(idx + 1).padStart(2, '0')}]</span>
+                  <span className="exp-index-tag">0{idx + 1}</span>
                   <h3>{exp.role}</h3>
                   <div className="company">{exp.company}</div>
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', flexWrap: 'wrap' }}>
                   <span className="exp-badge">{exp.type}</span>
                   <span className="exp-duration-tag">
-                    [{exp.duration}]
+                    {exp.duration}
                   </span>
                 </div>
               </div>
@@ -43,7 +43,7 @@ export const Experience = () => {
               <ul className="exp-list">
                 {exp.bulletPoints.map((point, pIdx) => (
                   <li key={pIdx}>
-                    <span className="exp-bullet-glyph">&gt;&gt;</span>
+                    <span className="exp-bullet-glyph">&bull;</span>
                     <span>{point}</span>
                   </li>
                 ))}

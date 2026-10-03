@@ -11,7 +11,7 @@ export const About = () => {
         <div className="section-header-center" style={{ marginBottom: '2.5rem' }}>
           <div className="hero-badge-container">
             <span className="hero-subtitle">
-              01 // ORIGIN &amp; ENGINEERING PHILOSOPHY
+              Background &amp; Engineering Philosophy
             </span>
           </div>
           <h2 className="section-title">
@@ -46,7 +46,7 @@ export const About = () => {
 
             <div className="about-edu-card glass-card">
               <div className="about-edu-header">
-                <span className="edu-tag">// ACADEMIC FOUNDATION</span>
+                <span className="edu-tag">Academic Foundation</span>
                 <span className="edu-status-badge">CURRENT</span>
               </div>
               <div className="edu-item-box">

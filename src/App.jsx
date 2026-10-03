@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { WebGLBackground } from './components/3d/WebGLBackground';
 import { Floating3DElements } from './components/3d/Floating3DElements';
-import { QuantumShockwave } from './components/3d/QuantumShockwave';
 import { CustomCursor } from './components/CustomCursor';
 import { CyberTerminal } from './components/CyberTerminal';
 import { Navbar } from './components/Navbar';
@@ -59,9 +58,6 @@ export const App = () => {
       <WebGLBackground theme={theme} />
       <Floating3DElements theme={theme} />
 
-      {/* Quantum Particle Shockwave Click Layer */}
-      <QuantumShockwave />
-
       {/* Futuristic Cyber Terminal HUD */}
       <CyberTerminal
         isOpen={terminalOpen}
@@ -87,20 +83,20 @@ export const App = () => {
         <Contact />
       </main>
 
-      {/* Floating HUD Terminal Quick Pill on Bottom Left */}
+      {/* Floating Command Menu Quick Pill on Bottom Left */}
       <button
         className="floating-terminal-trigger"
         onClick={() => {
           soundFX.playClick();
           setTerminalOpen(true);
         }}
-        title="Open Developer CLI HUD (Ctrl + K)"
-        aria-label="Open CLI HUD"
+        title="Open Command Menu (Ctrl + K)"
+        aria-label="Open Command Menu"
         onMouseEnter={() => soundFX.playHover()}
-        data-cursor="CLI"
+        data-cursor="MENU"
       >
         <span className="terminal-pill-pulse"></span>
-        <span>&gt;_ HUD</span>
+        <span>&gt;_ Menu</span>
         <span className="terminal-pill-key">^K</span>
       </button>
 

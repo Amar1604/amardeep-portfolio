@@ -33,7 +33,7 @@ export const Footer = () => {
             &copy; {new Date().getFullYear()} <strong>{personalInfo.name}</strong>. All rights reserved.
           </div>
           <div className="footer-passion-text">
-            SYSTEM TELEMETRY: ALL SERVICES OPERATIONAL // 60 FPS
+            Engineered with React &amp; Vite &bull; 60 FPS Optimized
           </div>
         </div>
       </div>
@@ -46,7 +46,7 @@ export const Footer = () => {
         onMouseEnter={() => soundFX.playHover()}
         data-cursor="TOP"
       >
-        <span>[TOP ^]</span>
+        <span>Top &uarr;</span>
       </button>
     </footer>
   );

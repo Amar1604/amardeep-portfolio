@@ -10,10 +10,10 @@ export const Projects = () => {
   const [selectedProject, setSelectedProject] = useState(null);
 
   const filters = [
-    { label: '[ALL PROJECTS]', value: 'all' },
-    { label: '[FULL STACK & WEB]', value: 'fullstack' },
-    { label: '[MOBILE APPS]', value: 'mobile' },
-    { label: '[AI & CYBERSECURITY]', value: 'ai' }
+    { label: 'All Projects', value: 'all' },
+    { label: 'Full-Stack & Web', value: 'fullstack' },
+    { label: 'Mobile Apps', value: 'mobile' },
+    { label: 'AI & Security', value: 'ai' }
   ];
 
   const popularTags = ['ALL', 'React 19', 'Flutter', 'Python', 'Django REST', 'FastAPI', 'Blockchain', 'Vite'];
@@ -60,7 +60,7 @@ export const Projects = () => {
           <div>
             <div className="hero-badge-container">
               <span className="hero-subtitle">
-                // SYSTEM REPOSITORIES &bull; PRODUCTION PROTOTYPES
+                Engineering Showcase &bull; Production &amp; Systems
               </span>
             </div>
             <h2 className="section-title">
@@ -85,7 +85,7 @@ export const Projects = () => {
 
         {/* Interactive Technology Quick-Pill Filter */}
         <div className="projects-tech-filter-row">
-          <span className="tech-filter-label">// TECH FILTER:</span>
+          <span className="tech-filter-label">Filter by Tech:</span>
           <div className="tech-filter-pills">
             {popularTags.map((tag) => (
               <button

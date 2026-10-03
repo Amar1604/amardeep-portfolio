@@ -41,7 +41,7 @@ export const ProjectModal = ({ project, onClose, onPrev, onNext }) => {
         <div className="modal-holo-header">
           <div className="holo-status">
             <span className="telemetry-live-dot"></span>
-            <span>SYSTEM_TELEMETRY // SPEC_ID: {project.id ? project.id.toUpperCase() : 'CORE_01'}</span>
+            <span>Project Showcase &bull; {project.category ? project.category.toUpperCase() : 'FULLSTACK'}</span>
           </div>
 
           <div className="modal-header-controls">
@@ -54,7 +54,7 @@ export const ProjectModal = ({ project, onClose, onPrev, onNext }) => {
                   title="Previous Project (Arrow Left)"
                   data-cursor="PREV"
                 >
-                  &larr; PREV
+                  &larr; Prev
                 </button>
                 <button
                   type="button"
@@ -63,7 +63,7 @@ export const ProjectModal = ({ project, onClose, onPrev, onNext }) => {
                   title="Next Project (Arrow Right)"
                   data-cursor="NEXT"
                 >
-                  NEXT &rarr;
+                  Next &rarr;
                 </button>
               </div>
             )}
@@ -77,7 +77,7 @@ export const ProjectModal = ({ project, onClose, onPrev, onNext }) => {
               aria-label="Close modal"
               data-cursor="CLOSE"
             >
-              <span>[ESC // CLOSE]</span>
+              <span>Close &times;</span>
             </button>
           </div>
         </div>
@@ -97,7 +97,7 @@ export const ProjectModal = ({ project, onClose, onPrev, onNext }) => {
 
         <div className="modal-body">
           <div className="modal-header-info">
-            <div className="modal-category-badge">[{project.category.toUpperCase()}]</div>
+            <div className="modal-category-badge">{project.category.toUpperCase()}</div>
             <h2>{project.title}</h2>
             <div className="modal-role">{project.role}</div>
             <div className="project-tags">
@@ -111,7 +111,7 @@ export const ProjectModal = ({ project, onClose, onPrev, onNext }) => {
             {/* Direct Clickable Repository Callout */}
             {githubUrl && (
               <div className="modal-repo-callout">
-                <span className="repo-callout-label">// REPO &amp; MORE INFO:</span>
+                <span className="repo-callout-label">Repository &amp; Source:</span>
                 <a
                   href={githubUrl}
                   target="_blank"
@@ -137,19 +137,19 @@ export const ProjectModal = ({ project, onClose, onPrev, onNext }) => {
           <div className="modal-grid">
             <div>
               <h4 className="modal-section-title">
-                <span className="modal-title-glyph">[CORE]</span> Engineering Capabilities
+                Key Engineering Capabilities
               </h4>
               <ul className="modal-features-list">
                 {project.features.map((feat, idx) => (
                   <li key={idx}>
-                    <span className="feature-bullet-glyph">&gt;&gt;</span>
+                    <span className="feature-bullet-glyph">&bull;</span>
                     <span>{feat}</span>
                   </li>
                 ))}
               </ul>
 
               <h4 className="modal-section-title">
-                <span className="modal-title-glyph">[CHALLENGE]</span> Technical Obstacle &amp; Resolution
+                Technical Challenges &amp; Solutions
               </h4>
               <p className="modal-challenge-text">
                 {project.challenges}
@@ -159,7 +159,7 @@ export const ProjectModal = ({ project, onClose, onPrev, onNext }) => {
             <div>
               <div className="modal-sidebar-card holo-metric-card">
                 <h4 className="sidebar-card-title">
-                  <span className="sidebar-tag">[METRIC]</span> Verified Benchmark
+                  Performance &amp; Verified Benchmark
                 </h4>
                 <p className="holo-metric-val">
                   {project.metrics}
@@ -168,7 +168,7 @@ export const ProjectModal = ({ project, onClose, onPrev, onNext }) => {
 
               <div className="modal-sidebar-card">
                 <h4 className="sidebar-card-title">
-                  <span className="sidebar-tag">[STACK]</span> Architecture Components
+                  Architecture Components
                 </h4>
                 <div className="sidebar-tech-stack">
                   {project.tags.map((tech, idx) => (
@@ -191,7 +191,7 @@ export const ProjectModal = ({ project, onClose, onPrev, onNext }) => {
                 onClick={() => soundFX.playClick()}
                 data-cursor="GITHUB"
               >
-                <span>[OPEN GITHUB REPO // MORE INFO]</span>
+                <span>View GitHub Repository</span>
               </a>
             )}
             {hasLiveDemo && (
@@ -203,7 +203,7 @@ export const ProjectModal = ({ project, onClose, onPrev, onNext }) => {
                 onClick={() => soundFX.playClick()}
                 data-cursor="LAUNCH"
               >
-                <span>[LAUNCH LIVE APPLICATION -&gt;]</span>
+                <span>Launch Live Demo &rarr;</span>
               </a>
             )}
           </div>

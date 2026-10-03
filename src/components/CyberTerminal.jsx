@@ -6,8 +6,8 @@ import { soundFX } from '../utils/soundFX';
 export const CyberTerminal = ({ isOpen, onClose, onToggleTheme, theme }) => {
   const [input, setInput] = useState('');
   const [history, setHistory] = useState([
-    { type: 'system', text: 'AMARDEEP_OS v3.0.4 [Quantum Kernel initialized]' },
-    { type: 'system', text: 'Type "help" to view executable commands, or "projects" to query repositories.' }
+    { type: 'system', text: 'Amardeep Developer Console • Interactive Navigation' },
+    { type: 'system', text: 'Type "help" to view commands, or click any chip below to run.' }
   ]);
   const [cmdHistory, setCmdHistory] = useState([]);
   const [historyIndex, setHistoryIndex] = useState(-1);
@@ -50,21 +50,20 @@ export const CyberTerminal = ({ isOpen, onClose, onToggleTheme, theme }) => {
           newHistory.push({
             type: 'output',
             text: [
-              'AVAILABLE SYSTEM COMMANDS:',
+              'AVAILABLE COMMANDS:',
               '  whoami       - Display developer summary & core architecture stack',
-              '  skills       - Query tech toolkit & proficiency metrics',
+              '  skills       - Query tech toolkit & proficiency tiers',
               '  projects     - Query software projects (--flagship for top picks)',
               '  benchmark    - Display verified Infosys query optimization benchmark',
               '  stats        - Display verified recruiter benchmarks & metrics',
-              '  resume       - Trigger instantaneous ATS resume document download',
+              '  resume       - Download verified PDF resume',
               '  contact      - Display communication channels & social links',
+              '  github       - Open GitHub profile in new tab',
+              '  linkedin     - Open LinkedIn profile in new tab',
               '  education    - Query academic & institutional credentials',
-              '  matrix       - Initialize digital cyber matrix stream',
-              '  hack         - Execute mock security bypass routine',
-              '  highfive     - Send a community kudos pulse to Amardeep',
-              '  theme        - Switch theme (e.g. "theme dark" or "theme light")',
-              '  clear        - Flush terminal buffer',
-              '  exit         - Close terminal HUD'
+              '  theme        - Toggle theme (e.g. "theme dark" or "theme light")',
+              '  clear        - Clear console history',
+              '  exit         - Close command menu'
             ].join('\n')
           });
           break;
@@ -79,7 +78,7 @@ export const CyberTerminal = ({ isOpen, onClose, onToggleTheme, theme }) => {
 
         case 'skills':
           const skillSummary = skillsData
-            .map((cat) => `[${cat.category}]\n  ` + cat.skills.map((s) => `${s.name} (${s.level})`).join(', '))
+            .map((cat) => `[${cat.category}]\n  ` + cat.skills.map((s) => `${s.name} [${s.tier}]`).join(', '))
             .join('\n\n');
           newHistory.push({ type: 'output', text: skillSummary });
           break;
@@ -150,18 +149,14 @@ export const CyberTerminal = ({ isOpen, onClose, onToggleTheme, theme }) => {
           });
           break;
 
-        case 'matrix':
-          newHistory.push({
-            type: 'matrix',
-            text: '01000001 01001101 01000001 01010010 01000100 01000101 01000101 01010000\n[QUANTUM MATRIX ACTIVATED: 0xDEADBEEF -> 0xCAFEBABE -> READY]'
-          });
+        case 'github':
+          window.open(personalInfo.github, '_blank');
+          newHistory.push({ type: 'output', text: `Opening GitHub profile: ${personalInfo.github}` });
           break;
 
-        case 'hack':
-          newHistory.push({
-            type: 'warning',
-            text: 'INITIALIZING OVERRIDE PROTOCOL...\n[####################] 100%\nACCESS GRANTED: Amardeep is ready for hiring.'
-          });
+        case 'linkedin':
+          window.open(personalInfo.linkedin, '_blank');
+          newHistory.push({ type: 'output', text: `Opening LinkedIn profile: ${personalInfo.linkedin}` });
           break;
 
         case 'theme':
@@ -210,7 +205,7 @@ export const CyberTerminal = ({ isOpen, onClose, onToggleTheme, theme }) => {
       }
     } else if (e.key === 'Tab') {
       e.preventDefault();
-      const commands = ['help', 'whoami', 'skills', 'projects', 'benchmark', 'stats', 'resume', 'contact', 'highfive', 'matrix', 'hack', 'theme', 'clear', 'exit'];
+      const commands = ['help', 'whoami', 'skills', 'projects', 'benchmark', 'stats', 'resume', 'contact', 'github', 'linkedin', 'theme', 'clear', 'exit'];
       const match = commands.find((c) => c.startsWith(input.toLowerCase()));
       if (match) setInput(match);
     } else {
@@ -224,7 +219,7 @@ export const CyberTerminal = ({ isOpen, onClose, onToggleTheme, theme }) => {
         className={`terminal-window ${isMaximized ? 'maximized' : ''}`}
         onClick={(e) => e.stopPropagation()}
         role="dialog"
-        aria-label="Cyber Developer Terminal HUD"
+        aria-label="Developer Command Menu"
       >
         <div className="terminal-scanline" />
 
@@ -232,7 +227,7 @@ export const CyberTerminal = ({ isOpen, onClose, onToggleTheme, theme }) => {
         <div className="terminal-header">
           <div className="terminal-title">
             <span className="terminal-glyph">&gt;_</span>
-            <span>AMARDEEP_CLI &bull; QUANTUM_HUD v3.0</span>
+            <span>amardeep.dev &bull; developer command menu</span>
           </div>
 
           <div className="terminal-actions">
@@ -242,15 +237,15 @@ export const CyberTerminal = ({ isOpen, onClose, onToggleTheme, theme }) => {
               title={isMaximized ? 'Restore Window' : 'Maximize Window'}
               data-cursor="MAX"
             >
-              <span>{isMaximized ? '[RESTORE]' : '[MAX]'}</span>
+              <span>{isMaximized ? 'Restore' : 'Maximize'}</span>
             </button>
             <button
               className="term-btn-text term-close-text"
               onClick={onClose}
-              title="Close HUD (Esc)"
+              title="Close (Esc)"
               data-cursor="CLOSE"
             >
-              <span>[ESC // CLOSE]</span>
+              <span>Close &times; (Esc)</span>
             </button>
           </div>
         </div>
@@ -285,7 +280,7 @@ export const CyberTerminal = ({ isOpen, onClose, onToggleTheme, theme }) => {
         <div className="terminal-footer">
           <span>Shortcuts: [Tab] Autocomplete &bull; [↑/↓] History &bull; [Esc] Close</span>
           <div className="term-quick-chips">
-            {['help', 'benchmark', 'skills', 'projects', 'resume', 'highfive'].map((chip) => (
+            {['help', 'projects', 'skills', 'benchmark', 'resume', 'contact', 'github'].map((chip) => (
               <button
                 key={chip}
                 className="term-chip"

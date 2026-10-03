@@ -55,7 +55,7 @@ export const Navbar = ({ theme, toggleTheme, onOpenTerminal }) => {
       <div className="container nav-container">
         <a href="#hero" className="logo" onMouseEnter={() => soundFX.playHover()} data-cursor="HOME">
           AMARDEEP<span>.DEV</span>
-          <span className="telemetry-live-dot" title="Live Telemetry: Systems Operational">
+          <span className="telemetry-live-dot" title="Status: Available for Opportunities">
             <span className="dot-pulse"></span>
           </span>
         </a>
@@ -79,20 +79,20 @@ export const Navbar = ({ theme, toggleTheme, onOpenTerminal }) => {
         </nav>
 
         <div className="nav-actions">
-          {/* Cyber Terminal Shortcut Button */}
+          {/* Command Menu Shortcut Button */}
           <button
             onClick={() => {
               soundFX.playClick();
               onOpenTerminal();
             }}
             className="nav-hud-btn"
-            title="Open Developer HUD Terminal (Ctrl + K or `)"
-            aria-label="Open Cyber Terminal HUD"
+            title="Open Command Menu (Ctrl + K)"
+            aria-label="Open Command Menu"
             onMouseEnter={() => soundFX.playHover()}
-            data-cursor="CLI"
+            data-cursor="MENU"
           >
             <span className="hud-glyph">&gt;_</span>
-            <span className="hud-btn-text">CLI</span>
+            <span className="hud-btn-text">Menu</span>
             <span className="hud-key-badge">^K</span>
           </button>
 

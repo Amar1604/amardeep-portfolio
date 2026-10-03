@@ -292,11 +292,11 @@ export const SkillGalaxy3D = ({ theme = 'dark' }) => {
       {/* Active Skill Telemetry HUD on Hover */}
       {hoveredSkill ? (
         <div className="skill-galaxy-active-hud">
-          <span className="active-hud-label">// INSPECTING NODE:</span>
+          <span className="active-hud-label">Node:</span>
           <span className="active-hud-name">{hoveredSkill.name}</span>
-          <span className="active-hud-level">[{hoveredSkill.level}]</span>
+          {hoveredSkill.tier && <span className="active-hud-level">[{hoveredSkill.tier}]</span>}
           {hoveredSkill.projectProof && (
-            <span className="active-hud-proof">&bull; Proven: {hoveredSkill.projectProof}</span>
+            <span className="active-hud-proof">&bull; Applied: {hoveredSkill.projectProof}</span>
           )}
         </div>
       ) : (
